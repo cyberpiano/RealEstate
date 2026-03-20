@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteHomespace | The Luxury Collection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --ivory: #faf9f6;
+            --onyx: #1a1a1a;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--ivory);
+            color: var(--onyx);
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        /* Smooth scrolling for anchor links */
+        html { scroll-behavior: smooth; }
+
+        /* Luxury Hero Parallax Effect */
+        .hero-section {
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .glass-nav {
+            background: rgba(250, 249, 246, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        /* Property Card Animations */
+        .property-card {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .property-card:hover {
+            transform: translateY(-12px);
+        }
+
+        .property-image-container img {
+            transition: transform 1.2s scale(1.05);
+        }
+
+        .property-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .gold-border-btn {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--gold);
+            color: var(--onyx);
+            transition: color 0.4s ease;
+        }
+
+        .gold-border-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--onyx);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .gold-border-btn:hover {
+            color: white;
+            border-color: var(--onyx);
+        }
+
+        .gold-border-btn:hover::before {
+            left: 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--ivory); }
+        ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full top-0 z-[100] border-b border-stone-200/50">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex justify-between h-24 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-semibold tracking-[0.3em] uppercase serif italic">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-12 text-[10px] uppercase tracking-[0.3em] font-bold">
+                    <a href="index.html" class="hover:text-[#d4af37] transition-colors">Showroom</a>
+                    <a href="contact.html" class="hover:text-[#d4af37] transition-colors">Contact</a>
+                    <div class="h-4 w-[1px] bg-stone-300"></div>
+                    <a href="admin.html" class="bg-[#1a1a1a] text-white px-6 py-3 hover:bg-[#d4af37] transition-all">Admin Access</a>
+                </div>
+
+                <!-- Hamburger -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-stone-600 hover:text-[#d4af37] transition-colors">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-[#faf9f6] z-[200] flex flex-col items-center justify-center space-y-10 transform translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+        <button onclick="toggleMobileMenu()" class="absolute top-10 right-10 text-3xl text-stone-400 hover:text-[#d4af37]">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <span class="text-2xl font-semibold tracking-[0.3em] uppercase serif italic mb-4">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+        <a href="index.html" class="text-sm uppercase tracking-[0.3em] font-bold hover:text-[#d4af37]">Showroom</a>
+        <a href="contact.html" class="text-sm uppercase tracking-[0.3em] font-bold hover:text-[#d4af37]">Contact</a>
+        <a href="admin.html" class="text-sm uppercase tracking-[0.3em] font-bold text-[#d4af37]">Admin Access</a>
+        <div class="pt-10 flex space-x-8 text-stone-400 text-xl">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin-in"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+        </div>
+    </div>
+
+    <!-- Cinematic Hero Header -->
+    <header class="hero-section flex items-center justify-center text-center text-white relative">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 px-6 max-w-4xl">
+            <span class="text-[10px] uppercase tracking-[0.6em] mb-6 block font-bold text-[#d4af37]">Established 1984</span>
+            <h1 class="text-5xl md:text-8xl serif mb-8 leading-tight">Define Your Legacy</h1>
+            <p class="text-lg md:text-xl font-light tracking-wide mb-12 opacity-90 max-w-2xl mx-auto italic serif">
+                Curating the world's most exceptional architectural masterpieces for the discerning collector.
+            </p>
+            <a href="#collections" class="inline-block border border-white px-12 py-5 text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-white hover:text-black transition-all">
+                Explore Collections
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+            <i class="fa-solid fa-chevron-down text-xl"></i>
+        </div>
+    </header>
+
+    <!-- Curated Property Gallery Section -->
+    <section id="collections" class="max-w-7xl mx-auto px-8 py-32">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+            <div class="max-w-xl">
+                <span class="text-[#d4af37] text-[10px] uppercase tracking-[0.4em] font-bold mb-4 block">Summer Portfolio</span>
+                <h2 class="text-4xl md:text-6xl serif">Architectural Icons</h2>
+            </div>
+            <p class="text-stone-500 font-light max-w-xs text-sm leading-relaxed">
+                Each listing is hand-vetted for its unique heritage, unparalleled craftsmanship, and investment potential.
+            </p>
+        </div>
+
+        <!-- Elite Filters -->
+        <div class="bg-white p-6 md:p-8 mb-16 border border-stone-100 shadow-sm flex flex-col md:flex-row gap-6 items-end">
+            <div class="flex-1 w-full">
+                <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-3 block font-bold">Search Location</label>
+                <div class="relative">
+                    <i class="fa-solid fa-location-dot absolute left-5 top-1/2 -translate-y-1/2 text-stone-300"></i>
+                    <input type="text" id="filterLocation" placeholder="e.g. Miami, Beverly Hills..." class="w-full bg-stone-50 border-b-2 border-transparent focus:border-[#d4af37] py-4 pl-12 pr-4 text-sm outline-none transition-colors">
+                </div>
+            </div>
+            <div class="md:w-64 w-full">
+                <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-3 block font-bold">Exact Bedrooms</label>
+                <div class="relative">
+                    <i class="fa-solid fa-bed absolute left-4 top-1/2 -translate-y-1/2 text-stone-300"></i>
+                    <input type="number" id="filterBedrooms" placeholder="e.g. 4" class="w-full bg-stone-50 border-b-2 border-transparent focus:border-[#d4af37] py-4 pl-12 pr-4 text-sm outline-none transition-colors">
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Grid -->
+        <div id="showroomGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+            <!-- Loading State Placeholder -->
+            <div class="col-span-full text-center py-20 opacity-50">
+                <div class="inline-block w-8 h-8 border-2 border-stone-200 border-t-[#d4af37] rounded-full animate-spin mb-4"></div>
+                <p class="uppercase tracking-widest text-[10px]">Initializing Gallery...</p>
+            </div>
+        </div>
+
+        <!-- Empty State (Hidden by default) -->
+        <div id="emptyState" class="hidden text-center py-40">
+            <h3 class="serif text-3xl text-stone-300">The Vault is Temporarily Closed</h3>
+            <p class="text-stone-400 mt-4 uppercase tracking-[0.2em] text-[10px]">New acquisitions coming soon</p>
+        </div>
+    </section>
+
+    <!-- Refined Footer -->
+    <footer class="bg-[#1a1a1a] text-white py-24 px-8 mt-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-20">
+            <div>
+                <span class="text-xl serif italic tracking-widest block mb-8 uppercase">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+                <p class="text-stone-400 font-light text-sm leading-relaxed mb-4">
+                    A global leader in high-value asset brokerage. Dedicated to discretion, excellence, and the art of fine living.
+                </p>
+                <div class="flex items-center gap-3 text-stone-300 text-sm font-light">
+                    <i class="fa-solid fa-phone text-[#d4af37]"></i>
+                    <a href="tel:+233543290219" class="hover:text-white transition-colors">+233 54 329 0219</a>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-[10px] uppercase tracking-[0.4em] font-bold text-[#d4af37]">Global Offices</h4>
+                <p class="text-stone-400 text-sm font-light">Accra, Ghana</p>
+                <p class="text-stone-400 text-sm font-light">Mayfair, London</p>
+                <p class="text-stone-400 text-sm font-light">Emaar Sq, Dubai</p>
+            </div>
+            <div class="space-y-6">
+                <h4 class="text-[10px] uppercase tracking-[0.4em] font-bold text-[#d4af37]">Stay Informed</h4>
+                <div class="flex border-b border-stone-700 pb-2">
+                    <input type="email" placeholder="Email Address" class="bg-transparent outline-none w-full text-sm font-light">
+                    <button class="text-[10px] uppercase tracking-widest">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-stone-500 text-[10px] uppercase tracking-widest">© 2024 Elite Homespace International. All Rights Reserved.</p>
+            <div class="flex space-x-8 text-stone-500 text-lg">
+                <i class="fa-brands fa-instagram hover:text-[#d4af37] cursor-pointer transition-colors"></i>
+                <i class="fa-brands fa-linkedin-in hover:text-[#d4af37] cursor-pointer transition-colors"></i>
+                <i class="fa-brands fa-x-twitter hover:text-[#d4af37] cursor-pointer transition-colors"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCDx7qEq159vWdRRI2t4UK9dq5ESN9m0zw",
+          authDomain: "realestate-7af59.firebaseapp.com",
+          projectId: "realestate-7af59",
+          storageBucket: "realestate-7af59.firebasestorage.app",
+          messagingSenderId: "462067082872",
+          appId: "1:462067082872:web:fb076c48e80240c327af8d",
+          measurementId: "G-NZGFW35MEV"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'elite-luxury-showroom';
+
+        let allHouses = [];
+
+        // Connect and Listen
+        async function connectShowroom() {
+            try {
+                await signInAnonymously(auth);
+                const housesRef = collection(db, 'artifacts', appId, 'public', 'data', 'houses');
+                
+                onSnapshot(housesRef, (snapshot) => {
+                    allHouses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    applyFilters();
+                }, (err) => console.error("Snapshot error:", err));
+            } catch (err) {
+                console.error("Auth error:", err);
+            }
+        }
+
+        window.applyFilters = () => {
+            const term = document.getElementById('filterLocation').value.toLowerCase();
+            const minBeds = parseInt(document.getElementById('filterBedrooms').value, 10) || 0;
+
+            const filtered = allHouses.filter(h => {
+                const locMatch = !term || (h.location && h.location.toLowerCase().includes(term));
+                let beds = 0;
+                if (h.bedrooms) {
+                    beds = parseInt(h.bedrooms, 10) || 0;
+                }
+                const bedMatch = minBeds === 0 || (beds === minBeds);
+                return locMatch && bedMatch;
+            });
+
+            renderGallery(filtered);
+        };
+
+        window.toggleMobileMenu = () => {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        };
+        
+        // Listeners
+        document.getElementById('filterLocation').addEventListener('input', applyFilters);
+        document.getElementById('filterBedrooms').addEventListener('change', applyFilters);
+
+        // WhatsApp Concierge Logic
+        window.openConcierge = (house) => {
+            const baseUrl = window.location.href.split('?')[0].replace('index.html', '');
+            const houseUrl = `${baseUrl}details.html?id=${house.id}`;
+            const message = `*Inquiry via EliteHomespace Showroom*\n\n*Asset:* ${house.name}\n*Valuation:* ${house.price}\n*Details:* ${house.description}\n\n*View Online:* ${houseUrl}\n\n_I would like to schedule a private viewing._`;
+            const waUrl = `https://wa.me/${house.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
+        };
+
+        function renderGallery(houses) {
+            const grid = document.getElementById('showroomGrid');
+            const empty = document.getElementById('emptyState');
+            grid.innerHTML = "";
+
+            if (houses.length === 0) {
+                grid.classList.add('hidden');
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            empty.classList.add('hidden');
+
+            houses.forEach(house => {
+                const card = document.createElement('div');
+                card.className = "property-card group bg-white border border-stone-100 shadow-sm overflow-hidden flex flex-col";
+                card.innerHTML = `
+                    <div class="property-image-container relative h-[500px] overflow-hidden">
+                        <a href="details.html?id=${house.id}">
+                            <img src="${house.images && house.images.length > 0 ? house.images[0] : (house.image || '')}" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0" alt="${house.name}">
+                        </a>
+                        <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-all"></div>
+                        <div class="absolute top-8 left-0 bg-[#1a1a1a] text-white py-2 px-6 text-[10px] tracking-[0.4em] font-bold uppercase shadow-2xl">
+                            ${house.price}
+                        </div>
+                    </div>
+                    <div class="p-10 text-center flex-grow flex flex-col">
+                        <span class="text-[9px] uppercase tracking-[0.5em] text-[#d4af37] font-bold mb-4 block">New Acquisition</span>
+                        <h3 class="text-3xl serif mb-4 group-hover:italic transition-all duration-500">${house.name}</h3>
+                        ${house.location ? `<p class="text-stone-500 text-xs tracking-widest uppercase mb-6"><i class="fa-solid fa-location-dot mr-2 text-stone-300"></i>${house.location}</p>` : ''}
+                        
+                        ${house.bedrooms ? `
+                        <div class="flex justify-center items-center py-6 border-t border-b border-stone-100 mb-8 mt-2">
+                            <div class="text-center group-hover:scale-105 transition-transform duration-500">
+                                <span class="text-[#d4af37] text-4xl block font-bold serif leading-none mb-2">${house.bedrooms}</span>
+                                <span class="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">Bedrooms</span>
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        <p class="text-stone-400 font-light text-sm leading-relaxed mb-10 line-clamp-2 px-4">
+                            ${house.description}
+                        </p>
+                        <div class="mt-auto flex flex-col gap-3">
+                            <a href="details.html?id=${house.id}" class="bg-[#1a1a1a] text-white py-5 text-[10px] uppercase tracking-[0.4em] font-bold z-10 hover:bg-[#d4af37] transition-all block text-center">
+                                Explore Asset
+                            </a>
+                            <button onclick='openConcierge(${JSON.stringify(house).replace(/'/g, "&apos;")})' 
+                                class="gold-border-btn w-full py-4 text-[9px] uppercase tracking-[0.4em] font-bold z-10">
+                                Connect with Concierge
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.onload = connectShowroom;
+    </script>
+</body>
+</html>

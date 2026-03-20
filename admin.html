@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteHomespace | Portfolio Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --ivory: #faf9f6;
+            --onyx: #1a1a1a;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--ivory);
+            color: var(--onyx);
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+
+        .admin-input {
+            background: transparent;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.75rem 0;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .admin-input:focus {
+            border-color: var(--gold);
+        }
+
+        .glass-nav {
+            background: rgba(250, 249, 246, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--ivory); }
+        ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 10px; }
+    </style>
+</head>
+<body class="pt-32 pb-20">
+
+    <!-- Management Navigation -->
+    <nav class="glass-nav fixed w-full top-0 z-[100] border-b border-stone-200/50">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex justify-between h-24 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-semibold tracking-[0.3em] uppercase serif italic">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+                    <span class="text-[9px] border border-stone-200 px-2 py-1 ml-4 tracking-widest text-stone-400 uppercase font-bold">Admin</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold">
+                    <a href="index.html" class="hover:text-[#d4af37] transition-colors">View Showroom</a>
+                    <div class="h-4 w-[1px] bg-stone-300"></div>
+                    <span id="status-indicator" class="flex items-center gap-2 text-stone-400">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                        Encrypted Session
+                    </span>
+                </div>
+
+                <!-- Hamburger -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-stone-600 hover:text-[#d4af37] transition-colors">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-[#faf9f6] z-[200] flex flex-col items-center justify-center space-y-10 transform translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+        <button onclick="toggleMobileMenu()" class="absolute top-10 right-10 text-3xl text-stone-400 hover:text-[#d4af37]">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <span class="text-2xl font-semibold tracking-[0.3em] uppercase serif italic mb-4">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+        <a href="index.html" class="text-sm uppercase tracking-[0.3em] font-bold hover:text-[#d4af37]">Showroom</a>
+        <a href="contact.html" class="text-sm uppercase tracking-[0.3em] font-bold hover:text-[#d4af37]">Contact</a>
+        <a href="admin.html" class="text-sm uppercase tracking-[0.3em] font-bold text-[#d4af37]">Admin Access</a>
+    </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-8">
+        <!-- Header -->
+        <div class="mb-16">
+            <span class="text-[#d4af37] text-[10px] uppercase tracking-[0.6em] font-bold mb-4 block">Internal Systems</span>
+            <h1 class="text-4xl md:text-6xl serif">Portfolio Management</h1>
+            <p class="text-stone-500 mt-4 font-light text-sm max-w-xl">
+                Manage your high-value assets and concierge routing. Changes made here reflect globally in real-time.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
+            <!-- Asset Acquisition Form -->
+            <div class="lg:col-span-4">
+                <div class="bg-white p-10 shadow-2xl shadow-stone-200/50 sticky top-32 border border-stone-100">
+                    <h3 class="serif text-2xl mb-8">New Acquisition</h3>
+                    <div class="space-y-8">
+                        <div class="flex flex-col">
+                            <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-1">Asset Name</label>
+                            <input id="hName" type="text" class="admin-input text-sm" placeholder="The Obsidian Villa">
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-1">Market Valuation</label>
+                            <input id="hPrice" type="text" class="admin-input text-sm" placeholder="$12,500,000">
+                        </div>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="flex flex-col">
+                                <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-1">Bedrooms</label>
+                                <input id="hBedrooms" type="number" class="admin-input text-sm" placeholder="e.g., 6">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-1">Location</label>
+                                <input id="hLocation" type="text" class="admin-input text-sm" placeholder="e.g., Miami, FL">
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-1">Concierge Number (WhatsApp)</label>
+                            <input id="hWhatsApp" type="text" class="admin-input text-sm" placeholder="233240000000">
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-1">Property Narrative</label>
+                            <textarea id="hDesc" rows="3" class="admin-input text-sm resize-none" placeholder="Describe the architectural soul..."></textarea>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-1">Cinematic Tour (Video URL)</label>
+                            <input id="hVideo" type="text" class="admin-input text-sm" placeholder="e.g., https://youtube.com/watch?v=...">
+                        </div>
+                        <div class="flex flex-col mt-4">
+                            <label class="text-[9px] uppercase tracking-widest text-stone-400 mb-2">Visual Media (Up to 5 Images)</label>
+                            <div id="imageGrid" class="grid grid-cols-3 gap-4">
+                                <!-- Add Button -->
+                                <label id="addImageBtn" class="relative flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-stone-100 cursor-pointer hover:bg-stone-50 transition-colors bg-stone-50 overflow-hidden">
+                                    <div class="text-center">
+                                        <i class="fa-solid fa-plus text-stone-400 mb-1"></i>
+                                        <p class="text-[8px] uppercase tracking-widest text-stone-400">Add Image</p>
+                                    </div>
+                                    <input type="file" id="hImage" class="hidden" accept="image/*" multiple onchange="addImages(this)">
+                                </label>
+                            </div>
+                        </div>
+                        <button id="submitBtn" onclick="saveHouse()" class="w-full bg-[#1a1a1a] text-white py-5 text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-[#d4af37] transition-all">
+                            Authenticate & List
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Inventory -->
+            <div class="lg:col-span-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="serif text-2xl">Active Collection</h3>
+                    <span id="asset-count" class="text-[10px] uppercase tracking-widest bg-stone-100 px-4 py-1 rounded-full font-bold">0 Assets</span>
+                </div>
+                <div id="adminList" class="space-y-6">
+                    <!-- Loading skeleton -->
+                    <div class="animate-pulse flex items-center gap-8 bg-white p-6 border border-stone-100">
+                        <div class="w-24 h-24 bg-stone-100"></div>
+                        <div class="flex-1 space-y-4">
+                            <div class="h-4 bg-stone-100 w-1/4"></div>
+                            <div class="h-2 bg-stone-100 w-1/6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyCDx7qEq159vWdRRI2t4UK9dq5ESN9m0zw",
+          authDomain: "realestate-7af59.firebaseapp.com",
+          projectId: "realestate-7af59",
+          storageBucket: "realestate-7af59.firebasestorage.app",
+          messagingSenderId: "462067082872",
+          appId: "1:462067082872:web:fb076c48e80240c327af8d",
+          measurementId: "G-NZGFW35MEV"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'elite-luxury-showroom';
+
+        window.toggleMobileMenu = () => {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        };
+
+        let compressedBase64Array = [];
+
+        // Initialization
+        async function initAdmin() {
+            try {
+                const userCredential = await signInAnonymously(auth);
+                console.log("Authenticated as:", userCredential.user.uid);
+                const housesRef = collection(db, 'artifacts', appId, 'public', 'data', 'houses');
+                
+                onSnapshot(housesRef, (snapshot) => {
+                    const houses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    renderAdminList(houses);
+                }, (err) => console.error("Database Error:", err));
+            } catch (err) {
+                console.error("Auth Error:", err);
+                alert("Authentication Failed: " + err.message + ". Please enable Anonymous Auth in Firebase Console.");
+            }
+        }
+
+        // Image Handling
+        // Image Handling with Compression
+        async function compressImage(file, maxWidth = 800) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const scale = maxWidth / img.width;
+                        canvas.width = maxWidth;
+                        canvas.height = img.height * scale;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        resolve(canvas.toDataURL('image/jpeg', 0.7)); // Quality 0.7
+                    };
+                };
+            });
+        }
+
+        window.addImages = async (input) => {
+            const files = Array.from(input.files);
+            if (compressedBase64Array.length + files.length > 5) {
+                alert("Maximum 5 images allowed.");
+                input.value = "";
+                return;
+            }
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = `Optimizing...`;
+
+            for (let file of files) {
+                if (compressedBase64Array.length < 5) {
+                    const base64 = await compressImage(file);
+                    compressedBase64Array.push(base64);
+                }
+            }
+            
+            renderImageGrid();
+            btn.disabled = false;
+            btn.innerText = "Authenticate & List";
+            input.value = "";
+        };
+
+        window.removeImage = (index) => {
+            compressedBase64Array.splice(index, 1);
+            renderImageGrid();
+        };
+
+        function renderImageGrid() {
+            const grid = document.getElementById('imageGrid');
+            const addBtn = document.getElementById('addImageBtn');
+            
+            // Remove existing thumbnails
+            const thumbnails = grid.querySelectorAll('.thumb-wrapper');
+            thumbnails.forEach(t => t.remove());
+
+            compressedBase64Array.forEach((img, index) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = "thumb-wrapper relative h-24 group bg-stone-100 rounded overflow-hidden shadow-sm";
+                wrapper.innerHTML = `
+                    <img src="${img}" class="w-full h-full object-cover">
+                    <button onclick="removeImage(${index})" class="absolute top-1 right-1 w-5 h-5 bg-black/50 hover:bg-red-500 text-white rounded-full flex items-center justify-center text-[8px] transition-colors">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+                `;
+                grid.insertBefore(wrapper, addBtn);
+            });
+
+            if (compressedBase64Array.length >= 5) {
+                addBtn.classList.add('hidden');
+            } else {
+                addBtn.classList.remove('hidden');
+            }
+        }
+
+        // Data Management
+        window.saveHouse = async () => {
+            const name = document.getElementById('hName').value;
+            const price = document.getElementById('hPrice').value;
+            const desc = document.getElementById('hDesc').value;
+            const wa = document.getElementById('hWhatsApp').value;
+            const video = document.getElementById('hVideo').value;
+            const location = document.getElementById('hLocation').value;
+            const bedrooms = document.getElementById('hBedrooms').value;
+
+            if (!name || !price || compressedBase64Array.length === 0 || !wa) {
+                return alert("Asset documentation incomplete. Name, Price, Media, and WhatsApp are mandatory.");
+            }
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = "Processing Data...";
+
+            try {
+                // Save directly to Firestore (Bypasses Storage/CORS issues)
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'houses'), {
+                    name, price, description: desc, whatsapp: wa, video: video || "", images: compressedBase64Array, location: location || "", bedrooms: bedrooms || "", createdAt: serverTimestamp()
+                });
+                
+                // Form Reset
+                document.getElementById('hName').value = "";
+                document.getElementById('hPrice').value = "";
+                document.getElementById('hDesc').value = "";
+                document.getElementById('hWhatsApp').value = "";
+                document.getElementById('hVideo').value = "";
+                document.getElementById('hLocation').value = "";
+                document.getElementById('hBedrooms').value = "";
+                compressedBase64Array = [];
+                renderImageGrid();
+            } catch (err) {
+                console.error(err);
+                alert("Acquisition failed. Please verify your Firestore rules.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Authenticate & List";
+            }
+        };
+
+        window.deleteHouse = async (id) => {
+            const confirmed = confirm("Are you sure you wish to remove this asset from the active collection? This action is irreversible.");
+            if (confirmed) {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'houses', id));
+            }
+        };
+
+        // Rendering Logic
+        function renderAdminList(houses) {
+            const list = document.getElementById('adminList');
+            const countLabel = document.getElementById('asset-count');
+            list.innerHTML = "";
+            countLabel.innerText = `${houses.length} Asset${houses.length !== 1 ? 's' : ''}`;
+
+            if (houses.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-20 border border-dashed border-stone-200">
+                        <p class="text-[10px] uppercase tracking-widest text-stone-400">No Active Assets in Portfolio</p>
+                    </div>
+                `;
+                return;
+            }
+
+            houses.forEach(house => {
+                const displayImage = house.images && house.images.length > 0 ? house.images[0] : (house.image || '');
+                const row = document.createElement('div');
+                row.className = "bg-white p-6 border border-stone-100 flex items-center gap-8 group hover:border-stone-300 transition-all";
+                row.innerHTML = `
+                    <img src="${displayImage}" class="w-24 h-24 object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4">
+                            <h4 class="serif text-xl">${house.name}</h4>
+                            <span class="text-[8px] border border-stone-100 px-2 py-0.5 tracking-widest text-stone-400 uppercase font-bold">Verified</span>
+                        </div>
+                        <p class="text-[#d4af37] text-[10px] uppercase tracking-widest font-bold mt-1">${house.price}</p>
+                        <p class="text-stone-400 text-[10px] mt-2 italic">Route: wa.me/${house.whatsapp}</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                         <button onclick="window.open('https://wa.me/${house.whatsapp}', '_blank')" class="text-stone-300 hover:text-[#d4af37] transition-colors p-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </button>
+                        <button onclick="deleteHouse('${house.id}')" class="text-stone-200 hover:text-red-500 transition-colors p-2">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+                list.appendChild(row);
+            });
+        }
+
+        window.onload = initAdmin;
+    </script>
+</body>
+</html>

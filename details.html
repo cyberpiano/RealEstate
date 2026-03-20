@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteHomespace | Asset Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --ivory: #faf9f6;
+            --onyx: #1a1a1a;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--ivory);
+            color: var(--onyx);
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        .glass-nav {
+            background: rgba(250, 249, 246, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .gold-border-btn {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--gold);
+            color: var(--onyx);
+            transition: color 0.4s ease;
+        }
+
+        .gold-border-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--onyx);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .gold-border-btn:hover {
+            color: white;
+            border-color: var(--onyx);
+        }
+
+        .gold-border-btn:hover::before {
+            left: 0;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--ivory); }
+        ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 10px; }
+    </style>
+</head>
+<body class="pt-24 pb-20">
+
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full top-0 z-[100] border-b border-stone-200/50">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex justify-between h-24 items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <span class="text-2xl font-semibold tracking-[0.3em] uppercase serif italic">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-12 text-[10px] uppercase tracking-[0.3em] font-bold">
+                    <a href="index.html" class="hover:text-[#d4af37] transition-colors">Showroom</a>
+                    <a href="contact.html" class="hover:text-[#d4af37] transition-colors">Contact</a>
+                </div>
+
+                <!-- Hamburger -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-stone-600 hover:text-[#d4af37] transition-colors">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-[#faf9f6] z-[200] flex flex-col items-center justify-center space-y-10 transform translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+        <button onclick="toggleMobileMenu()" class="absolute top-10 right-10 text-3xl text-stone-400 hover:text-[#d4af37]">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <span class="text-2xl font-semibold tracking-[0.3em] uppercase serif italic mb-4">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+        <a href="index.html" class="text-sm uppercase tracking-[0.3em] font-bold hover:text-[#d4af37]">Showroom</a>
+        <a href="contact.html" class="text-sm uppercase tracking-[0.3em] font-bold hover:text-[#d4af37]">Contact</a>
+        <a href="admin.html" class="text-sm uppercase tracking-[0.3em] font-bold text-[#d4af37]">Admin Access</a>
+        <div class="pt-10 flex space-x-8 text-stone-400 text-xl">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin-in"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+        </div>
+    </div>
+
+    <div id="loadingState" class="min-h-screen flex items-center justify-center">
+        <div class="text-center opacity-50">
+            <div class="inline-block w-12 h-12 border-4 border-stone-200 border-t-[#d4af37] rounded-full animate-spin mb-4"></div>
+            <p class="uppercase tracking-widest text-[10px]">Retrieving Asset Details...</p>
+        </div>
+    </div>
+
+    <div id="errorState" class="hidden min-h-screen flex items-center justify-center">
+        <div class="text-center">
+            <h3 class="serif text-3xl text-stone-300">Asset Not Found</h3>
+            <p class="text-stone-400 mt-4 uppercase tracking-[0.2em] text-[10px]">The requested asset is unavailable or has been acquired.</p>
+            <a href="index.html" class="inline-block mt-8 border border-stone-300 px-8 py-4 text-[10px] uppercase tracking-widest hover:bg-black hover:text-white transition-all">Return to Showroom</a>
+        </div>
+    </div>
+
+    <!-- Details Content -->
+    <main id="detailsContent" class="hidden opacity-0 transition-opacity duration-1000">
+        <!-- Hero Section -->
+        <header class="relative w-full h-[70vh] md:h-[80vh] bg-stone-100 flex items-center justify-center">
+            <img id="heroImage" src="" class="absolute inset-0 w-full h-full object-cover grayscale-[20%]" alt="Asset Hero">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10"></div>
+            <div class="relative z-10 text-center text-white px-6 w-full max-w-5xl mt-20">
+                <span class="text-[10px] uppercase tracking-[0.6em] mb-4 block font-bold text-[#d4af37]">Exclusive Listing</span>
+                <h1 id="propName" class="text-4xl md:text-7xl serif leading-tight mb-6"></h1>
+                <p id="propLocation" class="text-xs tracking-[0.4em] uppercase mb-8 text-stone-300 font-light hidden"></p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <p id="propPrice" class="text-xl md:text-2xl font-light tracking-widest text-white/90"></p>
+                    <div class="hidden md:block w-px h-6 bg-white/30"></div>
+                    <button id="heroConciergeBtn" class="bg-[#d4af37] text-black px-8 py-4 text-[10px] uppercase tracking-widest font-bold hover:bg-white transition-colors">
+                        Inquire Now
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section class="max-w-7xl mx-auto px-8 py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+            <!-- Left Narrative & Visuals -->
+            <div class="lg:col-span-8 space-y-20">
+                <!-- Description -->
+                <div>
+                    <span class="flex items-center gap-4 text-[#d4af37] text-[10px] uppercase tracking-[0.5em] font-bold mb-6">
+                        <span class="w-8 h-[1px] bg-[#d4af37]"></span> Asset Narrative
+                    </span>
+                    <h2 class="text-4xl md:text-5xl serif mb-8 text-stone-800">The Architecture</h2>
+                    <div id="propBedrooms" class="hidden mb-10 pb-8 border-b border-stone-200"></div>
+                    <p id="propDesc" class="text-stone-600 font-light text-base leading-loose whitespace-pre-line first-letter:text-6xl first-letter:font-bold first-letter:text-[#d4af37] first-letter:mr-3 first-letter:float-left first-letter:font-serif shadow-sm"></p>
+                </div>
+                
+                <!-- Cinematic Tour -->
+                <div id="videoContainer" class="hidden">
+                    <h3 class="flex items-center gap-4 text-3xl serif mb-10 text-stone-800 border-b border-stone-200 pb-4">
+                        <i class="fa-solid fa-film text-xl text-stone-300"></i> Cinematic Tour
+                    </h3>
+                    <div id="videoEmbed" class="aspect-video w-full bg-black flex items-center justify-center text-stone-400 overflow-hidden shadow-2xl rounded-sm">
+                        <!-- Video iframe -->
+                    </div>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div id="galleryContainer" class="hidden">
+                    <h3 class="flex items-center gap-4 text-3xl serif mb-10 text-stone-800 border-b border-stone-200 pb-4">
+                        <i class="fa-solid fa-camera text-xl text-stone-300"></i> Visual Portfolio
+                    </h3>
+                    <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Auto-populated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar (Sticky Concierge) -->
+            <div class="lg:col-span-4 relative">
+                <div class="sticky top-32 p-10 bg-[#1a1a1a] text-white shadow-2xl shadow-black/20 transform transition-transform hover:-translate-y-2 duration-500 border border-stone-800 rounded-sm">
+                    <span class="text-[#d4af37] text-[9px] uppercase tracking-[0.4em] font-bold mb-4 block">Direct Access</span>
+                    <h3 class="serif text-3xl mb-6">Connect with Concierge</h3>
+                    <p class="text-stone-400 text-sm font-light mb-10 leading-relaxed">
+                        Schedule a private viewing, request technical specifications, or consult our advisors regarding this asset.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 text-stone-300 pb-6 border-b border-stone-800/80">
+                            <div class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center"><i class="fa-solid fa-gem text-[#d4af37] text-sm"></i></div>
+                            <div>
+                                <p class="text-[9px] uppercase tracking-widest text-stone-500 font-bold">Service Level</p>
+                                <p class="text-sm first-letter:text-[#d4af37] font-light">Priority Access</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4 text-stone-300 pb-10">
+                            <div class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center"><i class="fa-regular fa-clock text-[#d4af37] text-sm"></i></div>
+                            <div>
+                                <p class="text-[9px] uppercase tracking-widest text-stone-500 font-bold">Availability</p>
+                                <p class="text-sm font-light text-[#d4af37]">Quick Response Guaranteed</p>
+                            </div>
+                        </div>
+
+                        <button id="sideConciergeBtn" class="w-full bg-[#d4af37] text-black py-5 text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-white transition-colors flex items-center justify-center gap-3 shadow-lg shadow-[#d4af37]/20">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Inquire Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Refined Footer -->
+    <footer class="bg-[#1a1a1a] text-white py-24 px-8 mt-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-20">
+            <div>
+                <span class="text-xl serif italic tracking-widest block mb-8 uppercase">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+                <p class="text-stone-400 font-light text-sm leading-relaxed mb-4">
+                    A global leader in high-value asset brokerage. Dedicated to discretion, excellence, and the art of fine living.
+                </p>
+                <div class="flex items-center gap-3 text-stone-300 text-sm font-light">
+                    <i class="fa-solid fa-phone text-[#d4af37]"></i>
+                    <a href="tel:+233543290219" class="hover:text-white transition-colors">+233 54 329 0219</a>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-[10px] uppercase tracking-[0.4em] font-bold text-[#d4af37]">Global Offices</h4>
+                <p class="text-stone-400 text-sm font-light">Accra, Ghana</p>
+                <p class="text-stone-400 text-sm font-light">Mayfair, London</p>
+                <p class="text-stone-400 text-sm font-light">Emaar Sq, Dubai</p>
+            </div>
+            <div class="space-y-6">
+                <h4 class="text-[10px] uppercase tracking-[0.4em] font-bold text-[#d4af37]">Stay Informed</h4>
+                <div class="flex border-b border-stone-700 pb-2">
+                    <input type="email" placeholder="Email Address" class="bg-transparent outline-none w-full text-sm font-light">
+                    <button class="text-[10px] uppercase tracking-widest">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-stone-500 text-[10px] uppercase tracking-widest">© 2024 Elite Homespace International. All Rights Reserved.</p>
+            <div class="flex space-x-8 text-stone-500 text-lg">
+                <i class="fa-brands fa-instagram hover:text-[#d4af37] cursor-pointer transition-colors"></i>
+                <i class="fa-brands fa-linkedin-in hover:text-[#d4af37] cursor-pointer transition-colors"></i>
+                <i class="fa-brands fa-x-twitter hover:text-[#d4af37] cursor-pointer transition-colors"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCDx7qEq159vWdRRI2t4UK9dq5ESN9m0zw",
+          authDomain: "realestate-7af59.firebaseapp.com",
+          projectId: "realestate-7af59",
+          storageBucket: "realestate-7af59.firebasestorage.app",
+          messagingSenderId: "462067082872",
+          appId: "1:462067082872:web:fb076c48e80240c327af8d",
+          measurementId: "G-NZGFW35MEV"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'elite-luxury-showroom';
+
+        window.toggleMobileMenu = () => {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        };
+
+        // Parse YouTube URL to embed
+        function parseYoutubeUrl(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            if (match && match[2].length === 11) {
+                return `https://www.youtube.com/embed/${match[2]}`;
+            }
+            return null;
+        }
+
+        async function loadAsset() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const houseId = urlParams.get('id');
+
+            if (!houseId) return showError();
+
+            try {
+                await signInAnonymously(auth);
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'houses', houseId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    renderDetails(docSnap.data());
+                } else {
+                    showError();
+                }
+            } catch (err) {
+                console.error("Error fetching asset:", err);
+                showError();
+            }
+        }
+
+        function renderDetails(house) {
+            document.getElementById('loadingState').classList.add('hidden');
+            const content = document.getElementById('detailsContent');
+            content.classList.remove('hidden');
+            setTimeout(() => content.classList.remove('opacity-0'), 50);
+
+            // Images array or fallback to single image
+            const images = house.images && house.images.length > 0 ? house.images : (house.image ? [house.image] : []);
+
+            if (images.length > 0) {
+                document.getElementById('heroImage').src = images[0];
+            }
+
+            document.getElementById('propName').innerText = house.name || 'Unnamed Asset';
+            document.getElementById('propPrice').innerText = house.price || 'Price on Request';
+            document.getElementById('propDesc').innerText = house.description || 'No description available.';
+
+            if (house.location) {
+                const locEl = document.getElementById('propLocation');
+                locEl.innerHTML = `<i class="fa-solid fa-location-dot mr-3 text-[#d4af37]"></i>${house.location}`;
+                locEl.classList.remove('hidden');
+            }
+
+            if (house.bedrooms) {
+                const bedContainer = document.getElementById('propBedrooms');
+                bedContainer.classList.remove('hidden');
+                bedContainer.innerHTML = `
+                    <div class="flex items-center gap-6">
+                        <span class="text-[#d4af37] text-6xl font-bold serif leading-none">${house.bedrooms}</span>
+                        <span class="text-[10px] uppercase tracking-[0.4em] text-stone-400 font-bold border-l border-stone-200 pl-6 py-2">Bedrooms<br><span class="text-stone-300 font-light text-[8px] mt-1 block">Designed Suites</span></span>
+                    </div>
+                `;
+            }
+
+            // Concierge actions
+            const houseUrl = window.location.href;
+            const message = `*Inquiry via EliteHomespace Showroom*\n\n*Asset:* ${house.name}\n*Valuation:* ${house.price}\n*Details:* ${house.description}\n\n*View Online:* ${houseUrl}\n\n_I would like to schedule a private viewing._`;
+            const waUrl = `https://wa.me/${house.whatsapp ? house.whatsapp.replace(/\D/g,'') : ''}?text=${encodeURIComponent(message)}`;
+            
+            const openWa = () => window.open(waUrl, '_blank');
+            document.getElementById('heroConciergeBtn').onclick = openWa;
+            document.getElementById('sideConciergeBtn').onclick = openWa;
+
+            // Gallery
+            if (images.length > 1) {
+                const galleryContainer = document.getElementById('galleryContainer');
+                const galleryGrid = document.getElementById('galleryGrid');
+                galleryContainer.classList.remove('hidden');
+
+                for (let i = 1; i < images.length; i++) {
+                    const imgDiv = document.createElement('div');
+                    // Dynamic layout: Make every third image span full width (if multiple of 2 remain)
+                    imgDiv.className = `relative overflow-hidden h-[400px] shadow-sm rounded-sm group ${i === 1 && images.length % 2 === 0 ? 'md:col-span-2' : ''}`;
+                    imgDiv.innerHTML = `
+                        <img src="${images[i]}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-1000 grayscale-[20%] group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                    `;
+                    galleryGrid.appendChild(imgDiv);
+                }
+            }
+
+            // Video
+            if (house.video && house.video.trim() !== "") {
+                const videoContainer = document.getElementById('videoContainer');
+                const videoEmbed = document.getElementById('videoEmbed');
+                videoContainer.classList.remove('hidden');
+
+                const ytUrl = parseYoutubeUrl(house.video);
+                if (ytUrl) {
+                    videoEmbed.innerHTML = `<iframe width="100%" height="100%" src="${ytUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                } else if (house.video.match(/\.(mp4|webm|ogg)$/)) {
+                    videoEmbed.innerHTML = `<video class="w-full h-full object-cover" controls src="${house.video}"></video>`;
+                } else {
+                    // Fallback link
+                    videoEmbed.innerHTML = `
+                        <div class="text-center p-8 bg-white w-full border border-stone-100 flex flex-col items-center justify-center">
+                            <i class="fa-solid fa-play text-3xl text-stone-300 mb-4"></i>
+                            <a href="${house.video}" target="_blank" class="text-sm font-bold border-b border-[#d4af37] pb-1 hover:text-[#d4af37] transition-colors uppercase tracking-widest text-[#1a1a1a]">Watch Cinematic Tour</a>
+                        </div>`;
+                }
+            }
+        }
+
+        function showError() {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+        }
+
+        window.onload = loadAsset;
+    </script>
+</body>
+</html>

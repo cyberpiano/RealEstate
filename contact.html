@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteHomespace | Connect With Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --ivory: #faf9f6;
+            --onyx: #1a1a1a;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--ivory);
+            color: var(--onyx);
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        .glass-nav {
+            background: rgba(250, 249, 246, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--ivory); }
+        ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 10px; }
+    </style>
+</head>
+<body class="pt-24 pb-20">
+
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full top-0 z-[100] border-b border-stone-200/50">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex justify-between h-24 items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <span class="text-2xl font-semibold tracking-[0.3em] uppercase serif italic">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-12 text-[10px] uppercase tracking-[0.3em] font-bold">
+                    <a href="index.html" class="hover:text-[#d4af37] transition-colors">Showroom</a>
+                    <a href="contact.html" class="hover:text-[#d4af37] transition-colors">Contact</a>
+                </div>
+
+                <!-- Hamburger -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-stone-600 hover:text-[#d4af37] transition-colors">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-[#faf9f6] z-[200] flex flex-col items-center justify-center space-y-10 transform translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+        <button onclick="toggleMobileMenu()" class="absolute top-10 right-10 text-3xl text-stone-400 hover:text-[#d4af37]">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <span class="text-2xl font-semibold tracking-[0.3em] uppercase serif italic mb-4">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+        <a href="index.html" class="text-sm uppercase tracking-[0.3em] font-bold hover:text-[#d4af37]">Showroom</a>
+        <a href="contact.html" class="text-sm uppercase tracking-[0.3em] font-bold hover:text-[#d4af37]">Contact</a>
+        <a href="admin.html" class="text-sm uppercase tracking-[0.3em] font-bold text-[#d4af37]">Admin Access</a>
+        <div class="pt-10 flex space-x-8 text-stone-400 text-xl">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin-in"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-8 py-24">
+        <!-- Header -->
+        <div class="mb-16 text-center max-w-3xl mx-auto">
+            <span class="text-[#d4af37] text-[10px] uppercase tracking-[0.6em] font-bold mb-4 block">Our Offices</span>
+            <h1 class="text-4xl md:text-6xl serif mb-6">Connect With EliteHomespace</h1>
+            <p class="text-stone-500 font-light text-sm leading-relaxed">
+                Whether you are looking to acquire a new luxury asset, or seeking an appraisal for your expansive estate, our concierge advisors are ready to assist you securely.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <!-- Contact Details -->
+            <div class="p-12 bg-white border border-stone-100 shadow-sm flex flex-col justify-center space-y-10">
+                <div>
+                    <h3 class="serif text-2xl mb-2">Direct Advisory</h3>
+                    <p class="text-stone-400 text-sm font-light mb-6">Reach out strictly confidentially directly via WhatsApp or Phone to our primary luxury routing center.</p>
+                    
+                    <a href="tel:+233543290219" class="flex items-center gap-6 group">
+                        <div class="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center group-hover:bg-[#d4af37] transition-colors">
+                            <i class="fa-solid fa-phone text-stone-400 group-hover:text-white transition-colors"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Private Telephone</p>
+                            <p class="text-xl serif text-stone-800">+233 54 329 0219</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="pt-8 border-t border-stone-100">
+                    <h3 class="serif text-2xl mb-2">Accra Global Headquarters</h3>
+                    <p class="text-stone-400 text-sm font-light leading-loose">
+                        EliteHomespace Collection Vault<br>
+                        Greater Accra Region<br>
+                        Ghana
+                    </p>
+                </div>
+            </div>
+
+            <!-- Map Wrap -->
+            <div class="bg-stone-100 h-[500px] shadow-sm overflow-hidden flex items-center justify-center p-2 border border-stone-200">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127072.06201625902!2d-0.271370830748123!3d5.591208722806283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9084b2b7a773%3A0xbed14ed8650e2dd3!2sAccra%2C%20Ghana!5e0!3m2!1sen!2sus!4v1710928731175!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <!-- Refined Footer -->
+    <footer class="bg-[#1a1a1a] text-white py-24 px-8 mt-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-20">
+            <div>
+                <span class="text-xl serif italic tracking-widest block mb-8 uppercase">Elite<span class="text-[#d4af37] not-italic">Homespace</span></span>
+                <p class="text-stone-400 font-light text-sm leading-relaxed mb-4">
+                    A global leader in high-value asset brokerage. Dedicated to discretion, excellence, and the art of fine living.
+                </p>
+                <div class="flex items-center gap-3 text-stone-300 text-sm font-light">
+                    <i class="fa-solid fa-phone text-[#d4af37]"></i>
+                    <a href="tel:+233543290219" class="hover:text-white transition-colors">+233 54 329 0219</a>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-[10px] uppercase tracking-[0.4em] font-bold text-[#d4af37]">Global Offices</h4>
+                <p class="text-stone-400 text-sm font-light">Accra, Ghana</p>
+                <p class="text-stone-400 text-sm font-light">Mayfair, London</p>
+                <p class="text-stone-400 text-sm font-light">Emaar Sq, Dubai</p>
+            </div>
+            <div class="space-y-6">
+                <h4 class="text-[10px] uppercase tracking-[0.4em] font-bold text-[#d4af37]">Stay Informed</h4>
+                <div class="flex border-b border-stone-700 pb-2">
+                    <input type="email" placeholder="Email Address" class="bg-transparent outline-none w-full text-sm font-light">
+                    <button class="text-[10px] uppercase tracking-widest">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-stone-500 text-[10px] uppercase tracking-widest">© 2024 Elite Homespace International. All Rights Reserved.</p>
+            <div class="flex space-x-8 text-stone-500 text-lg">
+                <i class="fa-brands fa-instagram hover:text-[#d4af37] cursor-pointer transition-colors"></i>
+                <i class="fa-brands fa-linkedin-in hover:text-[#d4af37] cursor-pointer transition-colors"></i>
+                <i class="fa-brands fa-x-twitter hover:text-[#d4af37] cursor-pointer transition-colors"></i>
+            </div>
+        </div>
+    </footer>
+    <script>
+        window.toggleMobileMenu = () => {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        };
+    </script>
+</body>
+</html>
